@@ -84,7 +84,7 @@ class App extends Component {
                   <InputGroupAddon addonType="prepend">$</InputGroupAddon>
                   <Input
                     placeholder="Amount"
-                    type="number"
+                    type="text"
                     name="salary"
                     value={salary}
                     onChange={this.inputHandler}
