@@ -1,4 +1,4 @@
-const ALLOWANCE = 25000 / 12;
+const ALLOWANCE = 25000;
 const NIS_RATE = 11.1 / 100;
 
 const PAY_FREQUENCIES = {
@@ -9,7 +9,6 @@ const PAY_FREQUENCIES = {
 
 function getYearlySalary(salary, frequency) {
   // Calculate Yearly Salary
-  console.log(PAY_FREQUENCIES[frequency] * salary);
   return PAY_FREQUENCIES[frequency] * salary;
 }
 
