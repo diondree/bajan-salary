@@ -1,0 +1,1 @@
+#Bajan Salary
