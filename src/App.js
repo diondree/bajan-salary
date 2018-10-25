@@ -31,14 +31,14 @@ function calculateSalary(salary, frequency) {
 
 class App extends Component {
   state = {
-    salary: 0,
+    salary: "",
     frequency: "monthly",
     net: 0
   };
 
   inputHandler = event => {
     const { name, value } = event.target;
-    this.setState({ [name]: value }, this.updateSalary());
+    this.setState({ [name]: value }, () => this.updateSalary());
   };
 
   updateSalary = () => {
@@ -53,7 +53,7 @@ class App extends Component {
     return (
       <div className="app">
         <div className="header" color="faded">
-          <h3 className="header-text">Barbados Salary</h3>
+          <h3 className="header-text">Bajan Salary</h3>
         </div>
         <div className="body">
           <Form>
@@ -61,7 +61,7 @@ class App extends Component {
               <Label for="examplePassword" sm={2}>
                 Frequency
               </Label>
-              <Col sm={8}>
+              <Col sm={6}>
                 <Input
                   type="select"
                   name="frequency"
@@ -79,7 +79,7 @@ class App extends Component {
               <Label for="salary" sm={2}>
                 Gross Salary
               </Label>
-              <Col sm={8}>
+              <Col sm={6}>
                 <InputGroup>
                   <InputGroupAddon addonType="prepend">$</InputGroupAddon>
                   <Input
