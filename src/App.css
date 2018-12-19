@@ -12,3 +12,13 @@
 .body {
   padding: 30px;
 }
+.dollaricon span {
+  background-color: #fff;
+  border-right-color: #fff;
+}
+.amount {
+  border-left-color: #fff;
+}
+.form-control {
+  color: #000;
+}
