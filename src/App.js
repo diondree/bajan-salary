@@ -1,19 +1,11 @@
-import React, { Component } from "react";
-import {
-  Col,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  InputGroup,
-  InputGroupAddon
-} from "reactstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { getYearlySalary, getNIS, getTax, returnToFrequency } from "./util";
-import "./App.css";
+import React, { Component } from 'react';
+import { Col, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { getYearlySalary, getNIS, getTax, returnToFrequency } from './util';
+import './App.css';
 
 function calculateSalary(salary, frequency) {
-  //converts to yearly salary
+  // converts to yearly salary
   const yearlySalary = getYearlySalary(salary, frequency);
 
   // Calculate NIS
@@ -31,9 +23,9 @@ function calculateSalary(salary, frequency) {
 
 class App extends Component {
   state = {
-    salary: "",
-    frequency: "monthly",
-    net: 0
+    salary: '',
+    frequency: 'monthly',
+    net: 0,
   };
 
   inputHandler = event => {
