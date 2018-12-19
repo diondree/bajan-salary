@@ -73,9 +73,12 @@ class App extends Component {
               </Label>
               <Col sm={6}>
                 <InputGroup>
-                  <InputGroupAddon addonType="prepend">$</InputGroupAddon>
+                  <InputGroupAddon className="dollaricon" addonType="prepend">
+                    $
+                  </InputGroupAddon>
                   <Input
-                    placeholder="Amount"
+                    className="amount"
+                    placeholder="0"
                     type="text"
                     name="salary"
                     value={salary}
@@ -89,7 +92,7 @@ class App extends Component {
                 Take Home Pay
               </Label>
               <Col sm={8}>
-                <h3>${net}</h3>
+                <h3>$ {net}</h3>
               </Col>
             </FormGroup>
           </Form>
