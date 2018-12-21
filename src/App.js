@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { Col, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, InputField, Dropdown, MyCard } from './components';
+import { Navbar, InputField, Dropdown, MyCard, Content } from './components';
 import { getYearlySalary, getNIS, getTax, returnToFrequency } from './util';
 import './App.css';
 
@@ -64,7 +64,7 @@ class App extends Component {
       <div className="app">
         <Navbar />
         <div className="body">
-          <div className="content">
+          <Content>
             <div className="inner-content">
               <h1>Salary Calculator</h1>
               <Dropdown
@@ -83,7 +83,7 @@ class App extends Component {
               />
               <MyCard content={netSalary} />
             </div>
-          </div>
+          </Content>
         </div>
       </div>
     );
