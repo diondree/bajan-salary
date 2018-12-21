@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Cell, Grid, Row } from '@material/react-layout-grid';
 import '@material/react-layout-grid/dist/layout-grid.css';
 
-import { Navbar, InputField, Dropdown, MyCard, Content } from './components';
+import { Navbar, InputField, Dropdown, SalaryCard, Content } from './components';
 import { getYearlySalary, getNIS, getTax, returnToFrequency, roundTo2 } from './util';
 
 import './App.css';
@@ -63,7 +63,6 @@ class App extends Component {
 
   updateSalary = () => {
     const { salary, frequency } = this.state;
-    // const income = this.calculateSalary(salary, frequency);
     const yearlySalary = getYearlySalary(salary, frequency);
 
     // Calculate NIS Yearly
@@ -125,7 +124,7 @@ class App extends Component {
                   </Row>
                 </Cell>
                 <Cell columns={6}>
-                  <MyCard content={{ netSalary, nis, incomeTax }} />
+                  <SalaryCard content={{ netSalary, nis, incomeTax, salary }} />
                 </Cell>
               </Row>
             </Grid>
