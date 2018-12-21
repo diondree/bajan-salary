@@ -7,6 +7,10 @@ const PAY_FREQUENCIES = {
   monthly: 12,
 };
 
+function roundTo2(num) {
+  return Math.round(num * 100) / 100;
+}
+
 function getYearlySalary(salary, frequency) {
   // Calculate Yearly Salary
   return PAY_FREQUENCIES[frequency] * salary;
@@ -49,4 +53,4 @@ function getTax(salary) {
   return bracket1 + bracket2 + remainder;
 }
 
-export { getTax, getNIS, getYearlySalary, returnToFrequency };
+export { getTax, getNIS, getYearlySalary, returnToFrequency, roundTo2 };
