@@ -1,31 +1,38 @@
 import React, { Component } from 'react';
-import { Col, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon } from 'reactstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { getYearlySalary, getNIS, getTax, returnToFrequency } from './util';
+// import { Col, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon } from 'reactstrap';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import { Cell, Grid, Row } from '@material/react-layout-grid';
+import '@material/react-layout-grid/dist/layout-grid.css';
+
+import { Navbar, InputField, Dropdown, SalaryCard, Content } from './components';
+import { getYearlySalary, getNIS, getTax, returnToFrequency, roundTo2 } from './util';
+
 import './App.css';
-
-function calculateSalary(salary, frequency) {
-  // converts to yearly salary
-  const yearlySalary = getYearlySalary(salary, frequency);
-
-  // Calculate NIS
-  const nis = getNIS(yearlySalary);
-
-  // Calculate Income Tax
-  const incomeTax = getTax(yearlySalary);
-
-  // Deduct NIS and Income Tax from salary
-  const afterDeductions = yearlySalary - nis - incomeTax;
-
-  // Convert back to frequency
-  return returnToFrequency(afterDeductions, frequency);
-}
 
 class App extends Component {
   state = {
     salary: '',
     frequency: 'monthly',
-    net: 0,
+    netSalary: '0.00',
+    nis: '0.00',
+    incomeTax: '0.00',
+    options: [
+      {
+        id: 1,
+        label: 'Weekly',
+        value: 'weekly',
+      },
+      {
+        id: 2,
+        label: 'Monthly',
+        value: 'monthly',
+      },
+      {
+        id: 3,
+        label: 'BiMonthly',
+        value: 'bimonthly',
+      },
+    ],
   };
 
   inputHandler = event => {
@@ -35,67 +42,72 @@ class App extends Component {
 
   updateSalary = () => {
     const { salary, frequency } = this.state;
-    const income = calculateSalary(salary, frequency);
-    const net = Math.round(income * 100) / 100;
-    this.setState({ net });
+    const yearlySalary = getYearlySalary(salary, frequency);
+
+    // Calculate NIS Yearly
+    const nisYearly = getNIS(yearlySalary);
+
+    // Calculate Income Tax Yearly
+    const incomeTaxYearly = getTax(yearlySalary);
+
+    // Deduct NIS and Income Tax from salary
+    const afterDeductionsYearly = yearlySalary - nisYearly - incomeTaxYearly;
+
+    const nisVal = returnToFrequency(nisYearly, frequency);
+    const incomeTaxVal = returnToFrequency(incomeTaxYearly, frequency);
+    const afterDeductions = returnToFrequency(afterDeductionsYearly, frequency);
+
+    const nis = roundTo2(nisVal);
+    const incomeTax = roundTo2(incomeTaxVal);
+    const netSalary = roundTo2(afterDeductions);
+
+    this.setState({ netSalary, nis, incomeTax });
   };
 
   render() {
-    const { salary, frequency, net } = this.state;
+    const { salary, frequency, netSalary, options, nis, incomeTax } = this.state;
     return (
       <div className="app">
-        <div className="header" color="faded">
-          <h3 className="header-text">Bajan Salary</h3>
-        </div>
+        <Navbar />
         <div className="body">
-          <Form>
-            <FormGroup row>
-              <Label for="examplePassword" sm={2}>
-                Frequency
-              </Label>
-              <Col sm={6}>
-                <Input
-                  type="select"
-                  name="frequency"
-                  placeholder="Frequency"
-                  value={frequency}
-                  onChange={this.inputHandler}
-                >
-                  <option value="weekly">Weekly</option>
-                  <option value="bimonthly">Bi-Monthly</option>
-                  <option value="monthly">Monthly</option>
-                </Input>
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="salary" sm={2}>
-                Gross Salary
-              </Label>
-              <Col sm={6}>
-                <InputGroup>
-                  <InputGroupAddon className="dollaricon" addonType="prepend">
-                    $
-                  </InputGroupAddon>
-                  <Input
-                    className="amount"
-                    placeholder="0"
-                    type="text"
-                    name="salary"
-                    value={salary}
-                    onChange={this.inputHandler}
-                  />
-                </InputGroup>
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="answer" sm={2}>
-                Take Home Pay
-              </Label>
-              <Col sm={8}>
-                <h3>$ {net}</h3>
-              </Col>
-            </FormGroup>
-          </Form>
+          <Content>
+            <Grid>
+              <Row>
+                <Cell columns={12}>
+                  <h1 className="page-heading">Salary Calculator</h1>
+                </Cell>
+              </Row>
+              <Row>
+                <Cell columns={6}>
+                  <Row>
+                    <Cell columns={12}>
+                      <Dropdown
+                        name="frequency"
+                        label="Frequency"
+                        value={frequency}
+                        handler={this.inputHandler}
+                        options={options}
+                      />
+                    </Cell>
+                  </Row>
+                  <Row>
+                    <Cell columns={12}>
+                      <InputField
+                        label="Gross Salary"
+                        name="salary"
+                        value={salary}
+                        handler={this.inputHandler}
+                        icon={<i className="material-icons">attach_money</i>}
+                      />
+                    </Cell>
+                  </Row>
+                </Cell>
+                <Cell columns={6}>
+                  <SalaryCard content={{ netSalary, nis, incomeTax, salary }} />
+                </Cell>
+              </Row>
+            </Grid>
+          </Content>
         </div>
       </div>
     );
