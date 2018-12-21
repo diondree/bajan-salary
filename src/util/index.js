@@ -8,7 +8,7 @@ const PAY_FREQUENCIES = {
 };
 
 function roundTo2(num) {
-  return Math.round(num * 100) / 100;
+  return (Math.round(num * 100) / 100).toFixed(2);
 }
 
 function getYearlySalary(salary, frequency) {
