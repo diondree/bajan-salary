@@ -13,9 +13,9 @@ class App extends Component {
   state = {
     salary: '',
     frequency: 'monthly',
-    netSalary: 0,
-    nis: 0,
-    incomeTax: 0,
+    netSalary: '0.00',
+    nis: '0.00',
+    incomeTax: '0.00',
     options: [
       {
         id: 1,
@@ -33,27 +33,6 @@ class App extends Component {
         value: 'bimonthly',
       },
     ],
-  };
-
-  calculateSalary = (salary, frequency) => {
-    // converts to yearly salary
-    const yearlySalary = getYearlySalary(salary, frequency);
-
-    // Calculate NIS
-    const nis = getNIS(yearlySalary);
-
-    // Calculate Income Tax
-    const incomeTax = getTax(yearlySalary);
-
-    // Deduct NIS and Income Tax from salary
-    const afterDeductions = yearlySalary - nis - incomeTax;
-
-    this.setState({
-      nis: returnToFrequency(nis, frequency),
-      incomeTax: returnToFrequency(incomeTax, frequency),
-    });
-    // Convert back to frequency
-    return returnToFrequency(afterDeductions, frequency);
   };
 
   inputHandler = event => {

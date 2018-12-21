@@ -20,7 +20,6 @@
 }
 .body {
   position: relative;
-  height: 100vh;
   overflow: hidden;
   width: 100%;
   max-width: 100%;
@@ -61,12 +60,8 @@
   font-style: normal;
   font-size: 24px;
   line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
+  float: right;
+  padding-right: 20px;
   vertical-align: top;
 }
 .net-salary {
@@ -78,9 +73,13 @@
 
 .salary-card {
   background-color: #f7f7f7;
-  border: 1px solid #000;
+  border: 1px solid #a9a9a9;
   border-radius: 4px;
   padding-left: 20px;
+  max-width: 100%;
+}
+.calculation-content {
+  align-items: right;
 }
 .answer-separator {
   display: block;
@@ -90,5 +89,6 @@
   margin-right: auto;
   border-style: inset;
   border-width: 1px;
-  margin-left: -18px;
+  margin-left: -15px;
+  margin-right: 5px;
 }

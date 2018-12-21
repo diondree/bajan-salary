@@ -5,7 +5,7 @@ import '@material/react-text-field/dist/text-field.css';
 const InputField = ({ label, name, value, handler, icon }) => (
   <div>
     <TextField label={label} outlined leadingIcon={icon} className="input">
-      <Input name={name} value={value} onChange={handler} />
+      <Input name={name} value={value} onChange={handler} maxLength="15" />
     </TextField>
   </div>
 );
