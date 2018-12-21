@@ -19,8 +19,6 @@
   padding-left: 10px;
 }
 .body {
-  padding-top: 30px;
-  /* display: flex; */
   position: relative;
   height: 100vh;
   overflow: hidden;
@@ -34,6 +32,9 @@
 .content {
   width: 100%;
   max-width: 900px;
+}
+.page-heading {
+  text-align: center;
 }
 .inner-content {
   display: flex;
@@ -52,8 +53,8 @@
   color: #000;
 }
 .input {
-  min-width: 300px;
   margin-bottom: 1rem;
+  width: 100%;
 }
 .net-salary {
   font-weight: normal;
