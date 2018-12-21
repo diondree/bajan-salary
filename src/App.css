@@ -19,7 +19,7 @@
   padding-left: 10px;
 }
 .body {
-  padding-top: 40px;
+  padding-top: 30px;
   /* display: flex; */
   position: relative;
   height: 100vh;
@@ -32,7 +32,6 @@
   justify-content: flex-start;
 }
 .content {
-  padding: 24px;
   width: 100%;
   max-width: 900px;
 }

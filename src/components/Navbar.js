@@ -6,7 +6,7 @@ import '@material/react-material-icon/dist/material-icon.css';
 
 const Navbar = () => (
   <div>
-    <TopAppBar title="Bajan Salary" className="top-bar" />
+    <TopAppBar title="Bajan Salary" className="top-bar" fixed />
   </div>
 );
 
