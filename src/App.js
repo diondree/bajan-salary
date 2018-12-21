@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Col, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon } from 'reactstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import { Col, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon } from 'reactstrap';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import { Navbar, InputField, Dropdown, MyCard } from './components';
 import { getYearlySalary, getNIS, getTax, returnToFrequency } from './util';
 import './App.css';
 
@@ -25,7 +26,24 @@ class App extends Component {
   state = {
     salary: '',
     frequency: 'monthly',
-    net: 0,
+    netSalary: 0,
+    options: [
+      {
+        id: 1,
+        label: 'Weekly',
+        value: 'weekly',
+      },
+      {
+        id: 2,
+        label: 'Monthly',
+        value: 'monthly',
+      },
+      {
+        id: 3,
+        label: 'BiMonthly',
+        value: 'bimonthly',
+      },
+    ],
   };
 
   inputHandler = event => {
@@ -36,66 +54,36 @@ class App extends Component {
   updateSalary = () => {
     const { salary, frequency } = this.state;
     const income = calculateSalary(salary, frequency);
-    const net = Math.round(income * 100) / 100;
-    this.setState({ net });
+    const netSalary = Math.round(income * 100) / 100;
+    this.setState({ netSalary });
   };
 
   render() {
-    const { salary, frequency, net } = this.state;
+    const { salary, frequency, netSalary, options } = this.state;
     return (
       <div className="app">
-        <div className="header" color="faded">
-          <h3 className="header-text">Bajan Salary</h3>
-        </div>
+        <Navbar />
         <div className="body">
-          <Form>
-            <FormGroup row>
-              <Label for="examplePassword" sm={2}>
-                Frequency
-              </Label>
-              <Col sm={6}>
-                <Input
-                  type="select"
-                  name="frequency"
-                  placeholder="Frequency"
-                  value={frequency}
-                  onChange={this.inputHandler}
-                >
-                  <option value="weekly">Weekly</option>
-                  <option value="bimonthly">Bi-Monthly</option>
-                  <option value="monthly">Monthly</option>
-                </Input>
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="salary" sm={2}>
-                Gross Salary
-              </Label>
-              <Col sm={6}>
-                <InputGroup>
-                  <InputGroupAddon className="dollaricon" addonType="prepend">
-                    $
-                  </InputGroupAddon>
-                  <Input
-                    className="amount"
-                    placeholder="0"
-                    type="text"
-                    name="salary"
-                    value={salary}
-                    onChange={this.inputHandler}
-                  />
-                </InputGroup>
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="answer" sm={2}>
-                Take Home Pay
-              </Label>
-              <Col sm={8}>
-                <h3>$ {net}</h3>
-              </Col>
-            </FormGroup>
-          </Form>
+          <div className="content">
+            <div className="inner-content">
+              <h1>Salary Calculator</h1>
+              <Dropdown
+                name="frequency"
+                label="Frequency"
+                value={frequency}
+                handler={this.inputHandler}
+                options={options}
+              />
+              <InputField
+                label="Gross Salary"
+                name="salary"
+                value={salary}
+                handler={this.inputHandler}
+                icon={<i className="material-icons">attach_money</i>}
+              />
+              <MyCard content={netSalary} />
+            </div>
+          </div>
         </div>
       </div>
     );
