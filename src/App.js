@@ -5,7 +5,7 @@ import { Cell, Grid, Row } from '@material/react-layout-grid';
 import '@material/react-layout-grid/dist/layout-grid.css';
 
 import { Navbar, InputField, Dropdown, SalaryCard, Content } from './components';
-import { getYearlySalary, getNIS, getTax, returnToFrequency, roundTo2 } from './util';
+import { getYearlySalary, getNIS, getYearlyNIS, getTax, returnToFrequency, roundTo2 } from './util';
 
 import './App.css';
 
@@ -33,11 +33,26 @@ class App extends Component {
         value: 'bimonthly',
       },
     ],
+    error: '',
   };
 
-  inputHandler = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value }, () => this.updateSalary());
+  frequencyInputHandler = event => {
+    const { value } = event.target;
+    this.setState({ frequency: value }, () => this.updateSalary());
+  };
+
+  salaryInputHandler = event => {
+    let { value } = event.target;
+    let error = '';
+
+    const parsed = parseInt(value, 10);
+
+    if (!parsed) {
+      value = '';
+      error = 'Please enter a number';
+    }
+
+    this.setState({ salary: value, error }, () => this.updateSalary());
   };
 
   updateSalary = () => {
@@ -45,7 +60,7 @@ class App extends Component {
     const yearlySalary = getYearlySalary(salary, frequency);
 
     // Calculate NIS Yearly
-    const nisYearly = getNIS(yearlySalary);
+    const nisYearly = getYearlyNIS(yearlySalary);
 
     // Calculate Income Tax Yearly
     const incomeTaxYearly = getTax(yearlySalary);
@@ -57,7 +72,7 @@ class App extends Component {
     const incomeTaxVal = returnToFrequency(incomeTaxYearly, frequency);
     const afterDeductions = returnToFrequency(afterDeductionsYearly, frequency);
 
-    const nis = roundTo2(nisVal);
+    const nis = getNIS(nisVal, frequency, yearlySalary);
     const incomeTax = roundTo2(incomeTaxVal);
     const netSalary = roundTo2(afterDeductions);
 
@@ -65,7 +80,7 @@ class App extends Component {
   };
 
   render() {
-    const { salary, frequency, netSalary, options, nis, incomeTax } = this.state;
+    const { salary, frequency, netSalary, options, nis, incomeTax, error } = this.state;
     return (
       <div className="app">
         <Navbar />
@@ -85,7 +100,7 @@ class App extends Component {
                         name="frequency"
                         label="Frequency"
                         value={frequency}
-                        handler={this.inputHandler}
+                        handler={this.frequencyInputHandler}
                         options={options}
                       />
                     </Cell>
@@ -96,7 +111,8 @@ class App extends Component {
                         label="Gross Salary"
                         name="salary"
                         value={salary}
-                        handler={this.inputHandler}
+                        handler={this.salaryInputHandler}
+                        error={error}
                         icon={<i className="material-icons">attach_money</i>}
                       />
                     </Cell>

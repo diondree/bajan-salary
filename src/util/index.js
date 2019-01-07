@@ -1,4 +1,9 @@
 const ALLOWANCE = 25000;
+const NIS_CEILINGS = {
+  bimonthly: '267.51',
+  monthly: '535.02',
+  weekly: '123.43',
+};
 const NIS_RATE = 11.1 / 100;
 
 const PAY_FREQUENCIES = {
@@ -20,8 +25,19 @@ function returnToFrequency(amount, frequency) {
   return amount / PAY_FREQUENCIES[frequency];
 }
 
-function getNIS(salary) {
+function getYearlyNIS(salary) {
   return salary * NIS_RATE;
+}
+
+function getNIS(initialVal, frequency, salary) {
+  if (Number.isNaN(salary)) {
+    return 'NaN';
+  }
+  const ceiling = NIS_CEILINGS[frequency];
+  if (initialVal < ceiling) {
+    return roundTo2(initialVal);
+  }
+  return ceiling;
 }
 
 function getTax(salary) {
@@ -53,4 +69,4 @@ function getTax(salary) {
   return bracket1 + bracket2 + remainder;
 }
 
-export { getTax, getNIS, getYearlySalary, returnToFrequency, roundTo2 };
+export { getTax, getYearlyNIS, getNIS, getYearlySalary, returnToFrequency, roundTo2 };
