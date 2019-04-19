@@ -36,6 +36,10 @@ class App extends Component {
     error: '',
   };
 
+  componentDidMount() {
+    (window.adsbygoogle = window.adsbygoogle || []).push({});
+  }
+
   frequencyInputHandler = event => {
     const { value } = event.target;
     this.setState({ frequency: value }, () => this.updateSalary());
@@ -85,14 +89,12 @@ class App extends Component {
       <div className="app">
         <Navbar />
         <div className="body">
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
           <ins
             className="adsbygoogle"
             style={{ display: 'inline-block', width: '970px', height: '90px' }}
             data-ad-client="ca-pub-3060667970956964"
             data-ad-slot="5006115912"
           />
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
           <Content>
             <Grid>
               <Row>
