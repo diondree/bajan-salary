@@ -89,14 +89,16 @@ class App extends Component {
       <div className="app">
         <Navbar />
         <div className="body">
-          <ins
-            className="adsbygoogle"
-            style={{ display: 'inline-block', width: '970px', height: '90px' }}
-            data-ad-client="ca-pub-3060667970956964"
-            data-ad-slot="5006115912"
-          />
           <Content>
             <Grid>
+              <Row>
+                <ins
+                  className="adsbygoogle"
+                  style={{ display: 'inline-block', width: '970px', height: '90px' }}
+                  data-ad-client="ca-pub-3060667970956964"
+                  data-ad-slot="5006115912"
+                />
+              </Row>
               <Row>
                 <Cell columns={12}>
                   <h1 className="page-heading">Salary Calculator</h1>
