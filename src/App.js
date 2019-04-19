@@ -94,7 +94,7 @@ class App extends Component {
               <Row>
                 <ins
                   className="adsbygoogle"
-                  style={{ display: 'inline-block', width: '100%', height: '90px' }}
+                  style={{ display: 'inline-block', width: '970px', height: '90px' }}
                   data-ad-client="ca-pub-3060667970956964"
                   data-ad-slot="5006115912"
                 />
