@@ -51,25 +51,16 @@ function getTax(salary) {
   }
 
   // if amount is 35000 or under then income tax is 16%
-  if (taxable <= 35000) {
-    return (taxable * 16) / 100;
+  if (taxable <= 50000) {
+    return (taxable * 12.5) / 100;
   }
 
   // if amount is over 35000 and less than or equal to 50 000
   // then the 35000 is done at 16% and the remainder is done at 33.5%
-  if (taxable > 35000 && taxable <= 50000) {
-    const bracket1 = (35000 * 16) / 100;
-    const remainder = ((taxable - 35000) * 33.5) / 100;
-    return bracket1 + remainder;
-  }
 
-  // if amount is over 50000 then the first 35000 is done at 16%
-  // the amount next 15000 is done at 33.5%
-  // the remainder is done at 40%
-  const bracket1 = (35000 * 16) / 100;
-  const bracket2 = (50000 * 33.5) / 100;
-  const remainder = ((taxable - 35000 - 50000) * 40) / 100;
-  return bracket1 + bracket2 + remainder;
+  const bracket1 = (50000 * 12.5) / 100;
+  const remainder = ((taxable - 50000) * 33.5) / 100;
+  return bracket1 + remainder;
 }
 
 export { getTax, getYearlyNIS, getNIS, getYearlySalary, returnToFrequency, roundTo2 };
