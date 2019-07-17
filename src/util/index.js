@@ -15,6 +15,8 @@ const PAY_FREQUENCIES = {
   monthly: 12,
 };
 
+const YEARLYNISCEILING = 6420.24;
+
 function roundTo2(num) {
   return (Math.round(num * 100) / 100).toFixed(2);
 }
@@ -28,8 +30,10 @@ function returnToFrequency(amount, frequency) {
   return amount / PAY_FREQUENCIES[frequency];
 }
 
+// FIXME: Handle Ceiling logic more elegantly
 function getYearlyNIS(salary) {
-  return salary * NIS_RATE;
+  const nis = salary * NIS_RATE;
+  return nis > YEARLYNISCEILING ? YEARLYNISCEILING : nis;
 }
 
 function getNIS(initialVal, frequency, salary) {
@@ -58,9 +62,12 @@ function getTax(salary) {
   // if amount is over 35000 and less than or equal to 50 000
   // then the 35000 is done at 16% and the remainder is done at 33.5%
 
-  const bracket1 = (50000 * 12.5) / 100;
+  const bracket = (50000 * 12.5) / 100;
   const remainder = ((taxable - 50000) * 33.5) / 100;
-  return bracket1 + remainder;
+  console.log(taxable);
+  console.log(bracket);
+  console.log(remainder);
+  return bracket + remainder;
 }
 
 export { getTax, getYearlyNIS, getNIS, getYearlySalary, returnToFrequency, roundTo2 };
