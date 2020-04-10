@@ -1,11 +1,11 @@
 const ALLOWANCE = 25000;
 
 // TODO Use insurable earnings instead
-// You are covered by the NIS up to the first $1,112 per week or $4,820 per month.
+// You are covered by the NIS up to the first $1,126 per week or $4,880 per month.
 const NIS_CEILINGS = {
-  bimonthly: '267.51',
-  monthly: '535.02',
-  weekly: '123.43',
+  bimonthly: '270.84',
+  monthly: '541.68',
+  weekly: '124.99',
 };
 const NIS_RATE = 11.1 / 100;
 
@@ -15,7 +15,7 @@ const PAY_FREQUENCIES = {
   monthly: 12,
 };
 
-const YEARLYNISCEILING = 6420.24;
+const YEARLYNISCEILING = 6500.16;
 
 function roundTo2(num) {
   return (Math.round(num * 100) / 100).toFixed(2);
@@ -63,10 +63,8 @@ function getTax(salary) {
   // then the 35000 is done at 16% and the remainder is done at 33.5%
 
   const bracket = (50000 * 12.5) / 100;
-  const remainder = ((taxable - 50000) * 33.5) / 100;
-  console.log(taxable);
-  console.log(bracket);
-  console.log(remainder);
+  const remainder = ((taxable - 50000) * 28.5) / 100;
+
   return bracket + remainder;
 }
 

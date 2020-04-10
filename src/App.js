@@ -37,6 +37,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+    // @ts-ignore
     (window.adsbygoogle = window.adsbygoogle || []).push({});
   }
 
