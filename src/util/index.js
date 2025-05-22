@@ -7,7 +7,7 @@ const NIS_CEILINGS = {
   monthly: '568.32',
   weekly: '131.20',
 };
-const NIS_RATE = 11.1 / 100;
+const NIS_RATE = 11.25 / 100;
 
 const PAY_FREQUENCIES = {
   bimonthly: 24,
