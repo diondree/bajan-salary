@@ -1,11 +1,11 @@
 const ALLOWANCE = 25000;
 
 // TODO Use insurable earnings instead
-// You are covered by the NIS up to the first $1,126 per week or $4,880 per month.
+// You are covered by the NIS up to the first $1219.00 per week or $5280.00 per month.
 const NIS_CEILINGS = {
-  bimonthly: '284.16',
-  monthly: '568.32',
-  weekly: '131.20',
+  bimonthly: '297.00',
+  monthly: '594.00',
+  weekly: '142.80',
 };
 const NIS_RATE = 11.25 / 100;
 
@@ -15,7 +15,7 @@ const PAY_FREQUENCIES = {
   monthly: 12,
 };
 
-const YEARLYNISCEILING = 6819.84;
+const YEARLYNISCEILING = 7128.0;
 
 function roundTo2(num) {
   return (Math.round(num * 100) / 100).toFixed(2);
